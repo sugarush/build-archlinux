@@ -1,0 +1,27 @@
+# $Id: PKGBUILD 189365 2016-10-26 02:29:38Z psev $
+# Maintainer: Paul Severance <paulseverance@gmail.com>
+
+pkgname=influxdb-relay
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Service to replicate InfluxDB data for high availability."
+arch=('i686' 'x86_64')
+url="https://github.com/influxdata/influxdb-relay"
+license=('MPL')
+depends=('glibc')
+makedepends=('git' 'go')
+source=("git+https://github.com/influxdata/influxdb-relay.git")
+md5sums=('SKIP')
+
+build() {
+  cd influxdb-relay
+  go get -v -d
+  go build || :
+}
+
+package() {
+  cd influxdb-relay
+
+  install -Dm755 influxdb-relay "$pkgdir"/usr/bin/influxdb-relay
+  install -d "$pkgdir"/etc/influxdb-relay
+}

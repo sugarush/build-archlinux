@@ -1,0 +1,26 @@
+# $Id: PKGBUILD 189365 2016-10-26 02:29:38Z psev $
+# Maintainer: Paul Severance <paulseverance@gmail.com>
+
+pkgname=consul-template
+pkgver=0.16.0
+pkgrel=1
+pkgdesc="Generic template rendering and notifications with Consul."
+arch=('i686' 'x86_64')
+url="https://github.com/hashicorp/consul-template"
+license=('MPL')
+depends=('glibc')
+makedepends=('git' 'go')
+source=("git+https://github.com/hashicorp/consul-template.git#tag=v$pkgver")
+md5sums=('SKIP')
+
+build() {
+  cd consul-template
+  NOTAG=true NOSIGN=true make dist
+}
+
+package() {
+  cd consul-template/pkg/linux_amd64
+
+  install -Dm755 consul-template "$pkgdir"/usr/bin/consul-template
+  install -d "$pkgdir"/etc/consul-template
+}
