@@ -1,0 +1,47 @@
+# Maintainer: Lucifer Avada <lucifer.avada@gmail.com>
+
+pkgname=consul-alerts
+pkgver=0.5.0
+pkgrel=1
+pkgdesc="A tool for alerting with Consul."
+arch=('x86_64')
+url="https://github.com/AcalephStorage/consul-alerts"
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$url/releases/download/v$pkgver/$pkgname-$pkgver-linux-amd64.tar")
+noextract=()
+md5sums=('e66662c4fcd1af71acbde65bf5b88168')
+validpgpkeys=()
+
+#prepare() {
+#	cd "$pkgname-$pkgver"
+#	patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+#}
+
+#build() {
+#	cd "$pkgname-$pkgver"
+#	./configure --prefix=/usr
+#	make
+#}
+
+#check() {
+#	cd "$pkgname-$pkgver"
+#	make -k check
+#}
+
+package() {
+	install -D -m 755 "${srcdir}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+#	cd "$pkgname-$pkgver"
+#	make DESTDIR="$pkgdir/" install
+}
